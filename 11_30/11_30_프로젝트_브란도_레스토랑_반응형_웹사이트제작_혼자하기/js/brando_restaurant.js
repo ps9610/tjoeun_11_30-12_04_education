@@ -691,6 +691,19 @@
             }
         },
         section14Fn:    function(){
+            
+            $("#submit").on({
+                click:function(){
+                    //3개라도 빈칸이 있다면 에러 메시지 + 전송취소 + addError
+                    //그렇지 않으면 성공 메시지 + 전송성공  + removeError
+                    if(){
+
+                    }
+                    else{
+                        
+                    }
+                }
+            })
         },
         footerFn:       function(){
         }

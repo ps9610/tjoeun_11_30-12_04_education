@@ -1054,7 +1054,7 @@
                             <li class="right">
                                 <div>
                                     <!-- 폼전송 -->
-                                    <form name="contact" id="contact"  method="post" action="response.php"><!-- response.php를 만들면 메세지 전송이 가능 -->
+                                    <form name="contact" id="contact" method="post" action="response.php"><!-- response.php를 만들면 메세지 전송이 가능 -->
                                         <ul>
                                             <li>
                                                 <div><input type="text" name="irum" id="irum" placeholder="*YOUR NAME"></div>
@@ -1064,7 +1064,7 @@
                                             </li>
                                             <li>
                                                 <div>
-                                                   <select name="interested" id="interested">
+                                                   <select name="interested" id="interested" >
                                                        <option value="WHAT ARE YOU INTERESTED IN?">WHAT ARE YOU INTERESTED IN?</option>
                                                        <option value="Banquets & Catering">Banquets & Catering</option>
                                                        <option value="Private Parties">Private Parties</option>
@@ -1083,6 +1083,10 @@
                                             <li>
                                                 <div><input type="submit" name="submit" id="submit" value="SUBMIT"></div>
                                             </li>
+                                            <li class="error-mesage">
+                                                <div>Validation errors occurred. Please confirm the fields and submit it again.</div>
+                                            </li>
+                                            <li class="success-message">Your message was sent successfully. Thanks.</li>
                                         </ul>
                                     </form>
                                 </div>

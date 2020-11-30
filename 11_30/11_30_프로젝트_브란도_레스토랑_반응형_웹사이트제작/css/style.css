@@ -368,17 +368,27 @@
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div input[type="text"] {outline:2px solid transparent;outline-offset:-2px;transition:outline .6s;}
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div input[type="text"]::placeholder {color:#aaa;}
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div input[type="text"]:focus {outline:2px solid #000;}
+
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div input[type="email"] {outline:2px solid transparent;outline-offset:-2px;transition:outline .6s;}
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div input[type="email"]::placeholder {color:#aaa;}
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div input[type="email"]:focus {outline:2px solid #000;}
+
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div select {background:#fff url(../img/select-arrow.png) no-repeat 98% 50%;}
-#main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div select:focus {out   line:0;}/* 일부 브라우저에서 크로스 브라우징을 하기 위해 필요하다*/
+#main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div select:focus {outline:0;}/* 일부 브라우저에서 크로스 브라우징을 하기 위해 필요하다*/
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div textarea {height:100px;outline:2px solid transparent;outline-offset:-2px;resize:none;transition:outline .6s;}
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div textarea::placeholder {color:#aaa;}
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div textarea:focus {outline:2px solid #000;}
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div input[type="submit"] {background:#000;color:#fff;font-size:13px;font-weight:600;border:2px solid #000;transition:all .3s;}
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div input[type="submit"]:hover {background:transparent;color:#000;}
 #main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li:last-child {padding-bottom:0;padding-top:10px;}
+#main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li.error-mesage div {display:none;padding-left:15px;line-height:30px;box-sizing:border-box;border:2px solid #ffb900;}
+#main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li.success-message {display:none;padding-left:15px;line-height:30px;box-sizing:border-box;border:2px solid #46b450;}
+
+/* 에러메세지 */
+#main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div textarea.addError {outline:2px solid #d33;}
+#main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li > div input.addError {outline:2px solid #d33;}
+#main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li.error-mesage.addError div {display:block;}
+#main  #section14 .wrap .gap .container > ul > li:last-child > div form > ul > li.success-message.addSuccess {display:block;}
 
 #footer {z-index:1;position:relative;width:100%;padding:80px 0;background:url(../img/restaurant-img41.jpg) no-repeat 50% 50%;background-size:cover;}/* 모든 창높이는 본인 모니터의 창 높이로 */
 #footer:after {z-index:2;position:absolute;content:"";display:block;top:0;left:0;width:100%;height:100%;background:#252525;opacity:.5;}

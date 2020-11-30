@@ -695,6 +695,94 @@
             }
         },
         section14Fn:    function(){
+            //오류 제어 = 
+            //전송 시 유효성 검사(빈칸으로 전송 할 수 없게)
+            //폼 전송하는 코드 만들기
+            //submit 버튼 클릭 시 폼 전송
+            //단 조건이 있다, 폼 내용 중 이름,이메일,메시지 내용은 반드시 입력 해야 전송됨
+            //그러면 전송 성공
+            //아니면 한 칸이라도 빈 칸인 경우는 전송 불가
+            var submit = $("#submit");
+
+            submit.on({
+                click:function(e){ //전송 버튼 클릭 후 유효성 검사
+                    e.preventDefault(); // submit 고유 전송버튼의 기능 제어(삭제시킴)
+                    $(".error-mesage").removeClass("addError");
+                    $(".success-message").removeClass("addSuccess");
+                    $("#irumVal").removeClass("addError");
+                    $("#mailVal").removeClass("addError");
+                    $("#messageVal").removeClass("addError");
+
+                    var irumVal = $("#irum").val();
+                    var mailVal = $("#mail").val();
+                    var interestedVal = $("#interested").val();
+                    var messageVal = $("#message").val();
+                        //if (셋 중에 한개라도 공백이라면 = 어디 하나라도 빈칸이라면){
+                        if(irumVal=="" || mailVal=="" || messageVal==""){
+                            //에러메세지와 전송 취소
+                            if(irumVal==""){
+                                $("#irumVal").addClass("addError"); //에러메세지를 색상으로 표시
+                            }
+                            else{ //셋 다 빈 값이 아니라면
+                                $("#irumVal").removeClass("addError");
+                            }
+                            if(mailVal==""){
+                                $("#mailVal").addClass("addError"); //에러메세지를 색상으로 표시
+                            }
+                            else{ //셋 다 빈 값이 아니라면
+                                $("#mailVal").removeClass("addError");
+                            }
+                            if(messageVal==""){
+                                $("#messageVal").addClass("addError"); //에러메세지를 색상으로 표시
+                            }
+                            else{ //셋 다 빈 값이 아니라면
+                                $("#messageVal").removeClass("addError");
+                            }
+                            $(".error-mesage").addClass("addError");
+                            return false; // 전송 취소는 무조건 마지막에 한 번만!! return이 모든 값을 초기화시키기 때문에
+                        }
+                        else{
+                            //성공메세지와 전송
+                            //$(".error-mesage").removeClass("addError");
+                            //$(".success-message").addClass("addSuccess"); => ajax로 가져감
+                           // contact.submit(); //<form name="contact"> 갖다쓴거
+                            //일반 전송 = API;화면 바뀜
+
+                            //위 API를 Ajax 전송방법으로 바꾸기
+                            //Ajax 전송 : 화면이 바뀌지 않고 내용만 전송됨
+                            $.ajax({//ajax는 서버에서만 실행됨
+                                 
+                                url  : "./response.php", //action="response.php"
+                                type : "post", //method="post"
+                                data : { // 입력 정보를 넣어줌
+                                    irum : irumVal,
+                                    mail : mailVal,
+                                    interested : interestedVal,
+                                    message : messageVal
+                                },
+                                success :function(data){
+                                    console.log(data); //전송결과
+                                    $(".error-mesage").removeClass("addError");
+                                    $(".success-message").addClass("addSuccess");
+
+                                    irumVal = $("#irum").val("");
+                                    mailVal = $("#mail").val("");
+                                    interestedVal = $("#interested").val(""); //select 첫번째값이 초기화값
+                                    messageVal = $("#message").val("");
+
+                                },
+                                error : function(){
+                                    console.log("ajax 오류");
+                                }
+                                //경로(내가 전송하고자 하는 파일 = response.php)먼저 쓰고 콤마(ajax 객체기반이라 콤마)
+                            });
+                        }
+                    // val() : value -> irum의 value 값 들어옴
+                }
+            })
+
+
+
         },
         footerFn:       function(){
         }
