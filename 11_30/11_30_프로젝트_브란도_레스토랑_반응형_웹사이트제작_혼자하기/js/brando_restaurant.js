@@ -691,17 +691,72 @@
             }
         },
         section14Fn:    function(){
-            
-            $("#submit").on({
-                click:function(){
-                    //3개라도 빈칸이 있다면 에러 메시지 + 전송취소 + addError
-                    //그렇지 않으면 성공 메시지 + 전송성공  + removeError
-                    if(){
+            var submit = $("#submit");
 
-                    }
-                    else{
+            submit.on({
+                click:function(e){ 
+                    e.preventDefault(); 
+                    $(".error-mesage").removeClass("addError");
+                    $(".success-message").removeClass("addSuccess");
+                    $("#irumVal").removeClass("addError");
+                    $("#mailVal").removeClass("addError");
+                    $("#messageVal").removeClass("addError");
+
+                    var irumVal = $("#irum").val();
+                    var mailVal = $("#mail").val();
+                    var interestedVal = $("#interested").val();
+                    var messageVal = $("#message").val();
                         
-                    }
+                        if(irumVal=="" || mailVal=="" || messageVal==""){
+                            
+                            if(irumVal==""){
+                                $("#irumVal").addClass("addError"); 
+                            }
+                            else{ 
+                                $("#irumVal").removeClass("addError");
+                            }
+                            if(mailVal==""){
+                                $("#mailVal").addClass("addError"); 
+                            }
+                            else{ 
+                                $("#mailVal").removeClass("addError");
+                            }
+                            if(messageVal==""){
+                                $("#messageVal").addClass("addError"); 
+                            }
+                            else{ 
+                                $("#messageVal").removeClass("addError");
+                            }
+                            $(".error-mesage").addClass("addError");
+                            return false; 
+                        }
+                        else{
+                            $.ajax({
+                                 
+                                url  : "./response.php",
+                                type : "post", 
+                                data : {
+                                    irum : irumVal,
+                                    mail : mailVal,
+                                    interested : interestedVal,
+                                    message : messageVal
+                                },
+                                success :function(data){
+                                    console.log(data);
+                                    $(".error-mesage").removeClass("addError");
+                                    $(".success-message").addClass("addSuccess");
+
+                                    irumVal = $("#irum").val("");
+                                    mailVal = $("#mail").val("");
+                                    interestedVal = $("#interested").val("");
+                                    messageVal = $("#message").val("");
+
+                                },
+                                error : function(){
+                                    console.log("ajax 오류");
+                                }
+                            });
+                        }
                 }
             })
         },
