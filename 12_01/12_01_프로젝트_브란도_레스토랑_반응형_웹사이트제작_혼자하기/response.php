@@ -15,7 +15,6 @@
                 <!-- input타입 : text(이름) -->
                 <span>이름</span>
                 <span><?php echo $_POST['irum'] ?></span> <!-- method가 post라서(get이면 GET씀), echo:서버에 뿌려라 -->
-                
             </div>
         </li>
         <li>

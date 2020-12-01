@@ -9,7 +9,7 @@
     <!-- initial-scale=1.0 :초기값 minimum-scale=1.0:본래 사이즈보다 줄이지 못하게, maximum-scale=1.6: 본래크기보다 1.6배만 크게, user-scalable=no:폼 요소 선택(포커스) 시 확대 현상을 제거 (사용자가 손가락으로 확대못하게함) -->
     <meta name="Title" content="Brando Restaurant">
     <meta name="Publisher" content="프론트엔드 박소혜">
-    <meta name="Author-date" content="2020-12_01"> 
+    <meta name="Author-date" content="2020-11-30"> 
     <meta name="Author" content="Brando">
     <meta name="Copyright" content="Brando">
     <meta name="Keywords" content="Brando, 웹표준,웹접근성,Bransdo Restaurant, Brando 반응형 웹사이트">
@@ -1057,15 +1057,15 @@
                                     <form name="contact" id="contact" method="post" action="response.php"><!-- response.php를 만들면 메세지 전송이 가능 -->
                                         <ul>
                                             <li>
-                                                <div><input type="text" name="irum" id="irum" placeholder="*YOUR NAME" value=""></div>
+                                                <div><input type="text" name="irum" id="irum" placeholder="*YOUR NAME"></div>
                                             </li>
                                             <li>
-                                                <div><input type="email" name="mail" id="mail" placeholder="*YOUR EMAIL" value=""></div>
+                                                <div><input type="email" name="mail" id="mail" placeholder="*YOUR EMAIL"></div>
                                             </li>
                                             <li>
                                                 <div>
                                                    <select name="interested" id="interested" >
-                                                       <option value="WHAT ARE YOU INTERESTED IN?" selected>WHAT ARE YOU INTERESTED IN?</option>
+                                                       <option value="WHAT ARE YOU INTERESTED IN?">WHAT ARE YOU INTERESTED IN?</option>
                                                        <option value="Banquets & Catering">Banquets & Catering</option>
                                                        <option value="Private Parties">Private Parties</option>
                                                        <option value="Breakfast">Breakfast</option>
@@ -1081,11 +1081,7 @@
                                                 </div>
                                             </li>
                                             <li>
-                                                <div><input type="submit" name="submit" id="submit" value="SUBMIT">
-                                                    <span class="ajax-loader">
-                                                         <img src="./img/ajax-loader.gif" alt="ajax loader img">
-                                                    </span>
-                                                </div>
+                                                <div><input type="submit" name="submit" id="submit" value="SUBMIT"></div>
                                             </li>
                                             <li class="error-mesage">
                                                 <div>Validation errors occurred. Please confirm the fields and submit it again.</div>
