@@ -1,8 +1,0 @@
-<span><? echo $_POST['irum'] ?></span>
-처럼 php 빼고 써도 됨
-
-php 파일에
-<? echo $_POST['irum'] 
-
-?>
- html 전체 코딩 아니여도 저 한 문장만 써도 php 코딩 가능

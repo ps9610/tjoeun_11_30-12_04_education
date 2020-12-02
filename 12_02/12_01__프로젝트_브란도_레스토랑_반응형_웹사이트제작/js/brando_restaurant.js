@@ -702,6 +702,7 @@
                     $(".success-message").removeClass("addSuccess");//성공 메세지
                 }
             })
+
             // 폼 Ajax 전송 버튼 클릭 이벤트
             var submit = $("#submit");
 
@@ -723,17 +724,48 @@
                     $(".ajax-loader").addClass("addAjax");
 
                     setId = setInterval(function(){
-                        cnt=cnt+0.5;
-                        //cnt++; 처럼 증감수 써도 되고 위처럼 산수 써도 됨
-                        if(cnt>=1.5){
+                        cnt++;
+                        //cnt+0.5;처럼 산수 써도 됨
+                        if(cnt>=1){
                             clearInterval(setId);
                             $(".ajax-loader").removeClass("addAjax");//로딩 이미지
                              formSubmitFn(); //폼 전송 에러메시지, 성공메시지, Ajax 함수
                         }
-                        console.log(cnt)
-                    },1000);
+                        //console.log(cnt)
+                    },500);
                     
                     function formSubmitFn(){
+                        // 1.슬래쉬 두번 세미콜론
+                        // 2. 대괄호
+
+                        //이름 유효성검사
+                        var regExpIrum = /[^a-zA-Z|ㄱ-ㅎ|ㅏ-ㅑ|가-힣]/; //영문과 한글이 아니면 입력 오류가 나게 하라;공백이 있어도 오류남
+                        if(regExpIrum.test( $("#irum").val())  === false ){
+                            alert("이름 유효성 검사 통과");
+                            
+                        }
+                        else{ //정상이 아닌 경우에만 return false 써줌
+                            alert("이름 유효성 검사 오류")
+                            return false;
+                           
+                        }
+
+
+                        //이메일 체크
+                        var regExpEmail =/^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z-0-9]([.]?[a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+                        //console.log( "유효성검사", regExpEmail.test( $("#mail").val() ) )
+                        
+                        if(  regExpEmail.test( $("#mail").val() ) ){ //유효성 검사의 규칙이 맞았다면
+                            //alert("이메일 유효성 검사 통과")
+                            $("#mail").removeClass("addError"); //에러메세지를 지워라
+                           
+                        }
+                        else{ //셋 다 빈 값이 아니라면
+                            //alert("이메일 유효성 검사 오류")
+                            $("#mail").addClass("addError"); //유효성 검사를 틀렸다면 에러메세지를 색상으로 표시
+                            return false;
+                        }
 
                             //if (셋 중에 한개라도 공백이라면 = 어디 하나라도 빈칸이라면){
                             if(irumVal=="" || mailVal=="" || messageVal==""){
@@ -747,12 +779,37 @@
                                 }
                                 //옛날에는 alert를 띄워서 단순 경고메시지만 주었지만
                                 //요즘은 UI를 사용하여 폼에 직접 변화를 줌
-                                if(mailVal==""){
-                                    $("#mail").addClass("addError"); //에러메세지를 색상으로 표시
-                                }
-                                else{ //셋 다 빈 값이 아니라면
-                                    $("#mail").removeClass("addError");
-                                }
+                               
+                                // 유효성 검사
+                                //정규 표현식 (RegExp) 이메일 체크
+                                //hello9610@naver.com
+
+                                //조건 첫번째. 맨 앞글자(첫글자)는 반드시 영숫자[a-zA-Z0-9]으로 시작(^)
+                                // ❗ 삿갓이 대괄호 안에 있고 밖에 있고의 차이가 있음 ❗
+                                    // [^a-zA-Z] 영문이 아닌 것;부정문 쓸 때 이렇게 씀;대괄호 안의 삿갓 = 부정 = ~아닌 것
+                                    // ^[a-zA-Z] 첫 글자가 영문으로 시작하는 것 = 대괄호 밖은 첫 글자의 의미
+                                //조건 마지막은 반드시 영문[a-zA-Z]으로 2글자에서 3글자{2,3}로 끝($)
+                                // 0 이상을 의미하는 특수문자는 * 을 쓰면 된다. 0이상 반복
+                                // 더하기를 의미하는 특수문자는 + 을 쓰면 된다.  1이상 반복; 1개 이상의 문자가 무조건 나와야함
+                                    // /^[a-zA-Z0-9]+[a-zA-Z{2,3}$]/; 라고 하면 앞의 영숫자는 무조건 나와야 함
+                                // 0 또는 1개의 문자를 의미할 땐 ? 를 쓰면 된다. 0또는1이상 매칭; 어떤 글자가 나와도 그만 안나와도 그만일때
+                                // . 는 정확히 1개 문자에 매칭한다
+                                // 소문자 i는 대소문자 상관없이 쓸 수 있게 해줌 = 대소문자 구별안함
+                                // 소문자 g는 전체 문자를 비교 점검한다
+                                    // /[ㄱ-ㅎ|ㅏ-ㅑ|가-힣|a-zA-Z]/g;라고하면 대괄호 안의 전체를 검사하는 것
+
+                                //첫번째 삿갓, 마지막 달러 = 타입속성
+                                //마지막의 중괄호는 범위, 2글자에서 3글자사이니까 {2,3}
+                                    // 만약 2글자만 가능하다 라고 하면 {2} 만 쓰면 됨
+                                    
+                                //                     sohye_9610(필요조건)           @gmail(필요조건)  .co          .kr(필요조건)    i는 대소문자 무시
+                                /* var regExpEmail = /^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z-0-9]   ([.]?[a-zA-Z])*.[a-zA-Z]{2,3}$/i; //마침표는 gmail.com naver.com할 때 그 마침표!!
+                                                                // ㄴ> 하이폰이나 언더바나 점이 온다 -> _9610 */
+                                
+                                // hello_9610@naver.com
+                                //첫문자: 영문대소문자 구별 안함 두번째 하이폰언더바점 올수도잇고안올수도잇고 세번째골뱅이필수조건 마지막점 반드시필요하고 마지막i 대소문자구별안함
+
+
                                 if(messageVal==""){
                                     $("#message").addClass("addError"); //에러메세지를 색상으로 표시
                                 }
