@@ -1075,7 +1075,183 @@ section234Fn:    function(){
         */
         },
         section14Fn:    function(){
-            
+            var setId = null;
+            //다시 입력 하기 위해 첫번째 입력상자(이름) 포커스 발생하면 성공 메세지 removeClass
+            $("#irum").on({
+                focusin:function(){
+                    $(".success-message").removeClass("addSuccess");//성공 메세지
+                }
+            })
+
+            // 폼 Ajax 전송 버튼 클릭 이벤트
+            var submit = $("#submit");
+
+            submit.on({
+                click:function(e){ 
+                    e.preventDefault(); // submit 고유 전송버튼의 기능 제어(삭제시킴)
+
+                    //초기화
+                    $(".error-mesage").removeClass("addError");//에러 메세지
+                    $(".success-message").removeClass("addSuccess");//성공 메세지
+
+                    var irumVal = $("#irum").val();//이름 입력 내용 값
+                    var mailVal = $("#mail").val();//메일 입력 내용 값
+                    var interestedVal = $("#interested").val();//흥미 있는 요소 선택(change)
+                    var messageVal = $("#message").val();//메시지 입력 내용 값
+                    var cnt = 0;
+                    
+                    //1~2초 동안 로딩 이미지 뜨고 사라지면 에러 메시지 또는 성공 메시지 나타남
+                    $(".ajax-loader").addClass("addAjax");
+
+                    setId = setInterval(function(){
+                        cnt++;
+                        //cnt+0.5;처럼 산수 써도 됨
+                        if(cnt>=1){
+                            clearInterval(setId);
+                            $(".ajax-loader").removeClass("addAjax");//로딩 이미지
+                             formSubmitFn(); //폼 전송 에러메시지, 성공메시지, Ajax 함수
+                        }
+                        //console.log(cnt)
+                    },500);
+                    
+                    function formSubmitFn(){
+                        // 1.슬래쉬 두번 세미콜론
+                        // 2. 대괄호
+
+                        //이름 유효성검사
+                        var regExpIrum = /[^a-zA-Z|ㄱ-ㅎ|ㅏ-ㅑ|가-힣]/; //영문과 한글이 아니면 입력 오류가 나게 하라;공백이 있어도 오류남
+                        if(regExpIrum.test( $("#irum").val())  === false ){
+                            alert("이름 유효성 검사 통과");
+                            $("#irum").removeClass("addError");
+                        
+                        }
+                        else{ //정상이 아닌 경우에만 return false 써줌
+                            alert("이름 유효성 검사 오류")
+                            $("#irum").addClass("addError");
+                            return false;
+                           
+                        }
+
+
+                        //이메일 체크
+                        var regExpEmail =/^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z-0-9]([.]?[a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+                        //console.log( "유효성검사", regExpEmail.test( $("#mail").val() ) )
+                        
+                        if(  regExpEmail.test( $("#mail").val() ) ){ //유효성 검사의 규칙이 맞았다면
+                            //alert("이메일 유효성 검사 통과")
+                            $("#mail").removeClass("addError"); //에러메세지를 지워라
+                           
+                        }
+                        else{ //셋 다 빈 값이 아니라면
+                            //alert("이메일 유효성 검사 오류")
+                            $("#mail").addClass("addError"); //유효성 검사를 틀렸다면 에러메세지를 색상으로 표시
+                            return false;
+                        }
+
+                            //if (셋 중에 한개라도 공백이라면 = 어디 하나라도 빈칸이라면){
+                            if(irumVal=="" || mailVal=="" || messageVal==""){
+                                //에러메세지와 전송 취소
+                                //에러메세지 테두리 색상 변화(빨강)
+                                if(irumVal==""){
+                                    $("#irum").addClass("addError"); //에러메세지를 색상으로 표시
+                                }
+                                else{ //셋 다 빈 값이 아니라면
+                                    $("#irum").removeClass("addError");
+                                }
+                                //옛날에는 alert를 띄워서 단순 경고메시지만 주었지만
+                                //요즘은 UI를 사용하여 폼에 직접 변화를 줌
+                               
+                                // 유효성 검사
+                                //정규 표현식 (RegExp) 이메일 체크
+                                //hello9610@naver.com
+
+                                //조건 첫번째. 맨 앞글자(첫글자)는 반드시 영숫자[a-zA-Z0-9]으로 시작(^)
+                                // ❗ 삿갓이 대괄호 안에 있고 밖에 있고의 차이가 있음 ❗
+                                    // [^a-zA-Z] 영문이 아닌 것;부정문 쓸 때 이렇게 씀;대괄호 안의 삿갓 = 부정 = ~아닌 것
+                                    // ^[a-zA-Z] 첫 글자가 영문으로 시작하는 것 = 대괄호 밖은 첫 글자의 의미
+                                //조건 마지막은 반드시 영문[a-zA-Z]으로 2글자에서 3글자{2,3}로 끝($)
+                                // 0 이상을 의미하는 특수문자는 * 을 쓰면 된다. 0이상 반복
+                                // 더하기를 의미하는 특수문자는 + 을 쓰면 된다.  1이상 반복; 1개 이상의 문자가 무조건 나와야함
+                                    // /^[a-zA-Z0-9]+[a-zA-Z{2,3}$]/; 라고 하면 앞의 영숫자는 무조건 나와야 함
+                                // 0 또는 1개의 문자를 의미할 땐 ? 를 쓰면 된다. 0또는1이상 매칭; 어떤 글자가 나와도 그만 안나와도 그만일때
+                                // . 는 정확히 1개 문자에 매칭한다
+                                // 소문자 i는 대소문자 상관없이 쓸 수 있게 해줌 = 대소문자 구별안함
+                                // 소문자 g는 전체 문자를 비교 점검한다
+                                    // /[ㄱ-ㅎ|ㅏ-ㅑ|가-힣|a-zA-Z]/g;라고하면 대괄호 안의 전체를 검사하는 것
+
+                                //첫번째 삿갓, 마지막 달러 = 타입속성
+                                //마지막의 중괄호는 범위, 2글자에서 3글자사이니까 {2,3}
+                                    // 만약 2글자만 가능하다 라고 하면 {2} 만 쓰면 됨
+                                    
+                                //                     sohye_9610(필요조건)           @gmail(필요조건)  .co          .kr(필요조건)    i는 대소문자 무시
+                                /* var regExpEmail = /^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z-0-9]   ([.]?[a-zA-Z])*.[a-zA-Z]{2,3}$/i; //마침표는 gmail.com naver.com할 때 그 마침표!!
+                                                                // ㄴ> 하이폰이나 언더바나 점이 온다 -> _9610 */
+                                
+                                // hello_9610@naver.com
+                                //첫문자: 영문대소문자 구별 안함 두번째 하이폰언더바점 올수도잇고안올수도잇고 세번째골뱅이필수조건 마지막점 반드시필요하고 마지막i 대소문자구별안함
+
+
+                                if(messageVal==""){
+                                    $("#message").addClass("addError"); //에러메세지를 색상으로 표시
+                                }
+                                else{ //셋 다 빈 값이 아니라면
+                                    $("#message").removeClass("addError");
+                                }
+                                $(".error-mesage").addClass("addError");
+                                return false; // 전송 취소는 무조건 마지막에 한 번만!! return이 모든 값을 초기화시키기 때문에
+                                //클릭한 버튼의 전송 취소하고 다시 입력 받는 형태의 리턴 값
+                            }
+                            else{
+                                //성공메세지와 전송
+                                //$(".error-mesage").removeClass("addError");
+                                //$(".success-message").addClass("addSuccess"); => ajax로 가져감
+                               // contact.submit(); //<form name="contact"> 갖다쓴거
+                                //일반 전송 = API;화면 바뀜
+                                
+                                // 3개 다 빈 칸이 아니면  remove가 안 되니까 여기서 초기화 시켜줘야됨
+                                $("#irum").removeClass("addError");
+                                $("#mail").removeClass("addError");
+                                $("#message").removeClass("addError");
+                                $(".error-mesage").removeClass("addError");
+
+                                //위 API를 Ajax 전송방법으로 바꾸기
+                                //Ajax 전송 : 화면이 바뀌지 않고 내용만 전송됨
+                                $.ajax({//ajax는 서버에서만 실행됨
+
+                                    url  : "./response.php", //action="response.php"
+                                    type : "post", //method="post"
+                                    data : { // 입력 정보를 넣어줌
+                                        irum : irumVal,
+                                        mail : mailVal,
+                                        interested : interestedVal,
+                                        message : messageVal
+                                    },
+                                    success :function(data){
+                                        console.log(data); //전송결과
+                                        
+
+                                        $(".success-message").addClass("addSuccess");
+
+
+                                        $("#irum").val("");
+                                        $("#mail").val("");
+                                        //$("#interested").val("");//select 첫번째값이 초기화값, .val("")는 안됨
+                                        //$("#interested").find("option").eq(0).prop("selected",true); 
+                                        //select 첫번째 목록을 selected, selected는 property속성=prop)
+                                        $("#interested option").eq(0).prop("selected",true); //select 첫번째값이 초기화값, .val("")는 안됨, select 첫번째 목록을 selected, selected는 property속성)
+                                        $("#message").val("");
+
+                                    },
+                                    error : function(){
+                                        console.log("ajax 오류");
+                                    }
+                                    //경로(내가 전송하고자 하는 파일 = response.php)먼저 쓰고 콤마(ajax 객체기반이라 콤마)
+                                });//ajax
+                            }//else if
+                    }//function        // val() : value -> irum의 value 값 들어옴
+                }//click
+            })//button(submit)
         },
         footerFn:         function(){
             
