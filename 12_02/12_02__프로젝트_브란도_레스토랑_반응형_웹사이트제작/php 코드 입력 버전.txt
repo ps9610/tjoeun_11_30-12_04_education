@@ -1,0 +1,31 @@
+
+php 코드 입력 버전
+
+버전1
+<?php echo $_POST['irum'] ?>
+<?php echo $_POST['mail'] ?>
+<?php echo $_POST['interested'] ?>
+<?php echo $_POST['message'] ?>
+
+버전2
+<?php 
+echo $_POST['irum'];
+echo $_POST['mail'];
+echo $_POST['interested'];
+echo $_POST['message'] 
+?>
+
+버전3
+<?php 
+echo $_POST['irum'] . $_POST['mail'] . $_POST['interested'] . $_POST['message'] 
+?>
+
+버전 3-1
+ : 한 칸씩 띄워지게 입력하기
+<?php 
+echo $_POST['irum']." ".$_POST['mail']." ".$_POST['interested']." ".$_POST['message'] 
+?>
+ : 띄어지게 하기 + 콤마
+<?php 
+echo $_POST['irum'].", ".$_POST['mail'].", ".$_POST['interested'].", ".$_POST['message'];
+?>

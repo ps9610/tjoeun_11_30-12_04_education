@@ -1,0 +1,26 @@
+프론트엔드가 화면을 새 화면을 바꿔서 서버를 전송 = API;
+프론트엔드가 화면을 화면을 안 바꿔서 서버를 전송 = Ajax;
+
+
+form 만들기까지는 프론트엔드
+response.php부터는 백엔드
+<?php irum ?> : php코딩
+
+response.php
+
+아파치 다운 받고 C드라이브 -> 아파치 -> 맨 위 폴더 C:\AutoSet10\public_htmlfh 
+-> restaurant 폴더 만들기 -> 브란도 폴더 복붙 -> 내 로컬서버 만들어짐
+localhost/restaurant (127.0.0.1/restaurant) 이 주소창
+
+
+http://sohye.dothome.co.kr/myadmin 로 들어가기
+아이디, 비밀번호 입력하면
+
+여러가지 데이터베이스 들어있음 (MySQL)
+서버  : 리눅스
+서버 타입 : MySQL
+
+웹서버도 있음 : 아파치 서버 (apache/2.2.15(CentOS) server)
+
+닷홈 아이디 ps9610
+닷홈 비밀번호 qkthgp6438!
