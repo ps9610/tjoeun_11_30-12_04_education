@@ -930,14 +930,14 @@
             })
         },
         scrollEventArrayFn : function(){
-                var secTop = [];
-                var section = $("section");
+                var secTop = [];  //섹션 탑 값 변수를 배열로 저장(기억); 변수 많이 안 쓰려고
+                var section = $("section"); 
                 var n = section.length-1; //섹션1 빼서 13개
                 var win = $(window);
 
                 // setTop 탑값 배열처리
                 for(var i=0;i<=n-1;i++){ //0부터 카운트해서 12까지니까 n-1
-                    secTop[i] = section.eq(i+1).offset().top-600;
+                    secTop[i] = section.eq(i+1).offset().top-600; //변수 i는 배열의 순서 번호, 섹션은 13개지만 0부터 12까지 나와야돼서 n-1
                     console.log(secTop[i])
                 }
 

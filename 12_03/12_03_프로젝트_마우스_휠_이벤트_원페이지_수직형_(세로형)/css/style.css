@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+#wrap {width:100%;}
+                            /* 줄 높이가 창 높이를 결정 */
+#wrap .section {width:100%;line-height:969px;font-size:150px;text-transform:uppercase;text-align:center;}
+#wrap #section01 {background:rgba(200,50,50,.7);}
+#wrap #section02 {background:rgba(200,200,50,.7);}
+#wrap #section03 {background:rgba(50,50,200,.7);}
+#wrap #section04 {background:rgba(200,50,200,.7);}
+#wrap #section05 {background:rgba(200,200,200,.7);}
+#wrap #section06 {background:rgba(50,200,50,.7);}
+#wrap #section07 {background:rgba(200,50,50,.7);}
+#wrap #section08 {background:rgba(200,200,50,.7);}
+#wrap #section09 {background:rgba(50,200,200,.7);}
+#wrap #section10 {background:rgba(50,200,50,.7);}

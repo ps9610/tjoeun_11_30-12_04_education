@@ -25,8 +25,7 @@
                 that.section13Fn();
                 that.section14Fn();
                 that.footerFn();
-                //that.scrollEventFn(); //스크롤 이벤트 패럴럭스 코딩 나열형
-                that.scrollEventArrayFn(); // 스크롤 이벤트 패럴럭스 배열 반복 처리 - 코딩 간략식
+                that.scrollEventFn();
         },//브란도에서 최초 실행될 js
 
         headerFn:       function(){ 
@@ -829,134 +828,33 @@
         },
         footerFn:       function(){
         },
-        scrollEventFn:  function(){
-            //스크롤 이벤트 (패럴럭스)
-            var secTop02 = $("#section02").offset().top-500;
-            var secTop03 = $("#section03").offset().top-500;
-            var secTop04 = $("#section04").offset().top-500;
-            var secTop05 = $("#section05").offset().top-500;
-            var secTop06 = $("#section06").offset().top-500;
-            var secTop07 = $("#section07").offset().top-500;
-            var secTop08 = $("#section08").offset().top-800;
-            var secTop09 = $("#section09").offset().top-1000;
-            var secTop10 = $("#section10").offset().top-1300;
-            var secTop11 = $("#section11").offset().top-1500;
-            var secTop12 = $("#section12").offset().top-1500;
-            var secTop13 = $("#section13").offset().top-1800;
-            var secTop14 = $("#section14").offset().top-2000;
-
+        scrollEventArrayFn : function(){
+            var secTop = [];  //섹션 탑 값 변수를 배열로 저장(기억); 변수 많이 안 쓰려고
+            var section = $("section"); 
+            var n = section.length-1; //섹션1 빼서 13개
             var win = $(window);
 
-            win.scroll(function(){
-                var that = $(this);
-                if( that.scrollTop()>secTop02 ){
-                    $("#section02").addClass("addEvent");
-                }
-                else{
-                    $("#section02").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop03 ){
-                    $("#section03").addClass("addEvent");
-                }
-                else{
-                    $("#section03").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop04 ){
-                    $("#section04").addClass("addEvent");
-                }
-                else{
-                    $("#section04").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop05 ){
-                    $("#section05").addClass("addEvent");
-                }
-                else{
-                    $("#section05").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop06 ){
-                    $("#section06").addClass("addEvent");
-                }
-                else{
-                    $("#section06").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop07 ){
-                    $("#section07").addClass("addEvent");
-                }
-                else{
-                    $("#section07").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop08 ){
-                    $("#section08").addClass("addEvent");
-                }
-                else{
-                    $("#section08").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop09 ){
-                    $("#section09").addClass("addEvent");
-                }
-                else{
-                    $("#section09").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop10 ){
-                    $("#section10").addClass("addEvent");
-                }
-                else{
-                    $("#section10").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop11 ){
-                    $("#section11").addClass("addEvent");
-                }
-                else{
-                    $("#section11").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop12 ){
-                    $("#section12").addClass("addEvent");
-                }
-                else{
-                    $("#section12").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop13 ){
-                    $("#section13").addClass("addEvent");
-                }
-                else{
-                    $("#section13").removeClass("addEvent");
-                }
-                if( that.scrollTop()>=secTop14 ){
-                    $("#section14").addClass("addEvent");
-                }
-                else{
-                    $("#section14").removeClass("addEvent");
-                }
-            })
-        },
-        scrollEventArrayFn : function(){
-                var secTop = [];
-                var section = $("section");
-                var n = section.length-1; //섹션1 빼서 13개
-                var win = $(window);
-
-                // setTop 탑값 배열처리
-                for(var i=0;i<=n-1;i++){ //0부터 카운트해서 12까지니까 n-1
-                    secTop[i] = section.eq(i+1).offset().top-600;
-                    console.log(secTop[i])
-                }
-
-
-
-            win.scroll(function(){
-                var that = $(this);
-                for(var i=1;i<=n-1;i++){
-                    if( that.scrollTop()>secTop[i] ){
-                        section.eq(i).addClass("addEvent");
-                }
-                else{
-                    section.eq(i).removeClass("addEvent");
-                }
+            // setTop 탑값 배열처리
+            for(var i=0;i<=n-1;i++){ //0부터 카운트해서 12까지니까 n-1
+                secTop[i] = section.eq(i+1).offset().top-600; //변수 i는 배열의 순서 번호, 섹션은 13개지만 0부터 12까지 나와야돼서 n-1
+                console.log(secTop[i])
             }
-            })
-        }
-    }; 
 
+
+
+        win.scroll(function(){
+            var that = $(this);
+            for(var i=1;i<=n-1;i++){
+                if( that.scrollTop()>secTop[i] ){
+                    section.eq(i).addClass("addEvent");
+            }
+            else{
+                section.eq(i).removeClass("addEvent");
+            }
+        }
+        })
+    }
+    }; 
 
 //위에서 함수를 만들고 밑에서 함수를 실행한다.
 
