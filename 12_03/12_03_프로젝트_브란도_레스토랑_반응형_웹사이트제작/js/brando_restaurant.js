@@ -25,7 +25,7 @@
                 that.section13Fn();
                 that.section14Fn();
                 that.footerFn();
-                that.scrollEventFn();
+                that.scrollEventArrayFn();
         },//브란도에서 최초 실행될 js
 
         headerFn:       function(){ 
@@ -721,7 +721,7 @@
                     var cnt = 0;
 
                     //유효성 검사 정규 표현식 변수 설정
-                    var regExpIrum = /[^a-zA-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; //이름 : 영문, 한글이 아닌 모든 것
+                    var regExpIrum = /^[a-zA-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣\s]+$/; //이름 : 영문, 한글이 아닌 모든 것, ]뒤에 +는 한 글자라도 나와야 한다는것, \s는 공백
                     //var regExpIrum = /\w/; //위 변수가 안 먹어서 입력값 영문 한글자 이상 아무거나 되게 설정해줌
                     var regExpEmail =/^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z-0-9]([.]?[a-zA-Z])*.[a-zA-Z]{2,3}$/i; 
                         // 이메일 : 영숫자 포함, @, . 끝 글자수 2-3 (필수조건)
@@ -764,12 +764,12 @@
                             console.log( regExpEmail.test( $("#mail").val() ) )
                             console.log( regExpMessage.test( $("#message").val() ) )
                                 //한글영문이 아닌게 잇다면
-                            if( regExpIrum.test( $("#irum").val() )  === true || 
+                            if( regExpIrum.test( $("#irum").val() )  === false || 
                                 regExpEmail.test( $("#mail").val() ) === false || 
                                 regExpMessage.test( $("#message").val() ) === false ){
                                 
                                 //한글 영문 아닌게 있다면
-                                if( regExpIrum.test( $("#irum").val() ) === true ){
+                                if( regExpIrum.test( $("#irum").val() ) === false ){
                                     $("#irum").addClass("addError");
                                 }
                                 else{//한글이나 영문이 들어갔다면
@@ -836,7 +836,7 @@
 
             // setTop 탑값 배열처리
             for(var i=0;i<=n-1;i++){ //0부터 카운트해서 12까지니까 n-1
-                secTop[i] = section.eq(i+1).offset().top-600; //변수 i는 배열의 순서 번호, 섹션은 13개지만 0부터 12까지 나와야돼서 n-1
+                secTop[i] = section.eq(i+1).offset().top-8000; //변수 i는 배열의 순서 번호, 섹션은 13개지만 0부터 12까지 나와야돼서 n-1
                 console.log(secTop[i])
             }
 
@@ -844,12 +844,12 @@
 
         win.scroll(function(){
             var that = $(this);
-            for(var i=1;i<=n-1;i++){
+            for(var i=0;i<=n-1;i++){
                 if( that.scrollTop()>secTop[i] ){
-                    section.eq(i).addClass("addEvent");
+                    section.eq(i+1).addClass("addEvent");
             }
             else{
-                section.eq(i).removeClass("addEvent");
+                section.eq(i+1).removeClass("addEvent");
             }
         }
         })
