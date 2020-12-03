@@ -49,13 +49,13 @@
             if( _wheelDelta<0){ //_wheelDelta이 음수, -120이면 다음 섹션으로 부드럽게 이동한다.
                 // 무한정 스크롤탑 되지 않게 범위를 정해줌
                     //console.log(index);
-                    if(index<9){//index가 9보다 작으면 밑의 코드 실행,(섹션이 0-9니까) 9보다 작지 않으면 사용 못하게 막음
+                    if(index<9){//다음섹션이니까 index값은 커짐,index가 9보다 작으면 밑의 코드 실행,(섹션이 0-9니까) 9보다 작지 않으면 사용 못하게 막음
                     htmlBody.stop().animate({ scrollTop:that.next().offset().top },800,"easeInOutSine"); //현재의 다음 섹션 탑 값
                 }
             }
             else{ //_wheelDelta이 양수, +120이면 이전 섹션으로 부드럽게 이동한다.
                 //console.log(index);
-                if(index>0){ //0일때는 어차피 맨 위니까
+                if(index>0){ //이전섹션이니까 index값은 작아짐, 0일때는 어차피 맨 위니까
                     htmlBody.stop().animate({ scrollTop:that.prev().offset().top },800,"easeInOutSine");
                 }
             }

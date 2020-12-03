@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+#wrap {width:100%;}
+
+#wrap .section{width:100%;line-height:969px;font-size:150px;text-align:center;}
+#wrap #section01 {background:#c99;}
+#wrap #section02 {background:#9c9;}
+#wrap #section03 {background:#99c;}
+#wrap #section04 {background:#b91;}
+#wrap #section05 {background:#9b1;}
+#wrap #section06 {background:#1b9;}
+#wrap #section07 {background:#e79;}
+#wrap #section08 {background:#9e7;}
+#wrap #section09 {background:#a67;}
+#wrap #section10 {background:#b26;}
