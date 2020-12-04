@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+#wrap {width:calc(100%*10);}
+
+#wrap .section {float:left;width:1903px;line-height:969px;font-size:150px;text-transform:uppercase;text-align:center;}
+                           /* ㄴ> 스크롤바 없애서  1903px아니고 1920px */
+#wrap #section01 {background:rgba(200,50,50,.7);}
+#wrap #section02 {background:rgba(200,200,50,.7);}
+#wrap #section03 {background:rgba(50,50,200,.7);}
+#wrap #section04 {background:rgba(200,50,200,.7);}
+#wrap #section05 {background:rgba(200,200,200,.7);}
+#wrap #section06 {background:rgba(50,200,50,.7);}
+#wrap #section07 {background:rgba(200,50,50,.7);}
+#wrap #section08 {background:rgba(200,200,50,.7);}
+#wrap #section09 {background:rgba(50,200,200,.7);}
+#wrap #section10 {background:rgba(50,200,50,.7);}

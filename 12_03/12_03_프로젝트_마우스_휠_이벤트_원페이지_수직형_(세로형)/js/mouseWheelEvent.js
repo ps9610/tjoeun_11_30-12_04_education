@@ -33,7 +33,7 @@
     _section.each(function(index){
         //$(this).on("click",function(event){}) //click 이벤트를 콜백처리 하겟다는 뜻
         var that = $(this)
-        that.on("mousewheel",function(event){ //Delta값 가져올라고 휠 이벤트 쓴거임
+        that.on("mousewheel DOMMouseScroll",function(event){ //Delta값 가져올라고 휠 이벤트 쓴거임
             event.preventDefault(); //이전에 발생한 모든 이벤트에 대해서 제거시키고 새롭게 시작한다.
 
             //console.log( event.originalEvent.wheelDelta ); 
@@ -42,10 +42,16 @@
                 //위로 스크롤하면 +120 아래로 스크롤하면 -120
                 //크롬에서 보임 
                 //같은 의미의 detail은 firefox에서 보임
-            
-            _wheelDelta = event.originalEvent.wheelDelta; //휠의 동작이 - 인지 + 인지만 보면 됨
-            //console.log( "마우스 휠 델타값", _wheelDelta ); 
-            
+
+                //파이어폭스
+                if(event.detail){
+                    _wheelDelta = event.detail*(-1*40);
+                }
+                else{
+                    _wheelDelta = event.originalEvent.wheelDelta; //휠의 동작이 - 인지 + 인지만 보면 됨
+                }
+                //console.log( "마우스 휠 델타값", _wheelDelta ); 
+
             if( _wheelDelta<0){ //_wheelDelta이 음수, -120이면 다음 섹션으로 부드럽게 이동한다.
                 // 무한정 스크롤탑 되지 않게 범위를 정해줌
                     //console.log(index);
